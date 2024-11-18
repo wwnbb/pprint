@@ -36,3 +36,11 @@ func TestPprintComplex(t *testing.T) {
 	}
 	pp.PrettyPrint(complexStruct)
 }
+
+func TestPprintSlice(t *testing.T) {
+	slice := []TestStruct{
+		{Name: "Jane", Age: 25},
+		{Name: "Jack", Age: 20},
+	}
+	pp.PrettyPrint(slice)
+}
