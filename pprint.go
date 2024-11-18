@@ -1,9 +1,9 @@
 package pprint
 
 import (
-	"encoding/json"
 	"fmt"
 	"reflect"
+	json "github.com/goccy/go-json"
 )
 
 func ptr[T any](value T) (pointer *T) { return &value }
