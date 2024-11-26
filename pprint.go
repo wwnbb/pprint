@@ -2,13 +2,11 @@ package pprint
 
 import (
 	"fmt"
-	"reflect"
 	json "github.com/goccy/go-json"
+	"reflect"
 )
 
-func ptr[T any](value T) (pointer *T) { return &value }
-
-func PrettyPrint(v interface{}) {
+func PrettyFormat(v interface{}) string {
 	t := reflect.TypeOf(v)
 	if t.Kind() == reflect.Ptr {
 		t = t.Elem()
@@ -18,11 +16,14 @@ func PrettyPrint(v interface{}) {
 	case reflect.Struct, reflect.Map, reflect.Slice, reflect.Array:
 		b, err := json.MarshalIndent(v, "", "  ")
 		if err != nil {
-			fmt.Printf("Error: %v\n", err)
-			return
+			return fmt.Sprintf("Error: %v\n", err)
 		}
-		fmt.Println(string(b))
+		return string(b)
 	default:
-		fmt.Printf("%+v\n", v)
+		return fmt.Sprintf("%+v\n", v)
 	}
+}
+
+func PrettyPrint(v interface{}) {
+	fmt.Print(PrettyFormat(v))
 }
